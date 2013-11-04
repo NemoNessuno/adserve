@@ -51,8 +51,10 @@ class TestCouchbaseServer
   attr_accessor :host, :port, :num_nodes
 
   def initialize(params = {})
-    @host, @port = ENV['COUCHBASE_SERVER'].split(':')
-    @port = @port.to_i
+#    @host, @port = ENV['COUCHBASE_SERVER'].split(':')
+    @host = "127.0.0.1"
+    @port = 8091
+#    @port = @port.to_i
 
     if @host.nil? || @host.empty? || @port == 0
       raise ArgumentError, "Check COUCHBASE_SERVER variable. It should be hostname:port"
