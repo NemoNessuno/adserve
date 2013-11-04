@@ -14,13 +14,10 @@ gem 'simple_form'
 gem 'web-app-theme', :git =>'git://github.com/pilu/web-app-theme.git'
 
 group :development, :test do
-  gem 'debugger'
   gem "factory_girl_rails", "~> 4.0"
   gem "rspec-rails"
   gem 'capybara'
   gem 'selenium-webdriver'
-  gem 'pry-rails'
-  gem 'pry-byebug'
 end
 
 group :assets do
