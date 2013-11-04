@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>AdServe</title>
+		<%= stylesheet_link_tag "application", :media => "all" %>
+		<%= javascript_include_tag "application" %>
+		<%= csrf_meta_tag %>
+	</head>
+	<body>
+		<div id="container">
+			<div id="header">
+				<h1><a href="/">AdServe</a></h1>
+				<div id="user-navigation">
+					<ul class="wat-cf">
+						<li>
+							Logged in as <%= current_user.full_name %>
+						</li>
+						<li>
+							<a href="#"><%= t("web-app-theme.profile", :default => "Profile") %></a>
+						</li>
+						<li>
+							<a href="#"><%= t("web-app-theme.settings", :default => "Settings") %></a>
+						</li>
+						<li>
+							<a href="/log_out" class="logout"><%= t("web-app-theme.logout", :default => "Logout") %></a>
+						</li>
+					</ul>
+				</div>
+				<div id="main-navigation">
+					<ul class="wat-cf"></ul>
+				</div>
+			</div>
+			<div id="wrapper" class="wat-cf">
+				<div id="main">
+					<div class="flash">
+						<% flash.each do |type, message| -%>
+						<div class="message <%= type %>">
+							<p>
+								<%= message %>
+							</p>
+						</div>
+						<% end -%>
+					</div>
+					<div class="block" id="block-tables">
+						<div class="secondary-navigation">
+							<ul class="wat-cf">
+								<li class="<%= @menuindex== 0 ? "first current" : "first"%>">
+								<%= link_to "Home", advertisers_home_path %>
+								</li>
+								<li class="<%= @menuindex== 1 ? "current": ""%>">
+								<%= link_to "Campaigns", advertisers_campaigns_path %>
+								</li>
+								<li class="<%= @menuindex== 2 ? "current": ""%>">
+								<%= link_to "Find Websites", advertisers_find_websites_path %>
+								</li>
+								<li class="<%= @menuindex== 3 ? "current" : ""%>">
+								<%= link_to "Billing", advertisers_billing_path %>
+								</li>
+								<li class="<%= @menuindex== 4 ? "current" : ""%>">
+								<%= link_to "Analysis", advertisers_analysis_path %>
+								</li>
+								<li class="<%= @menuindex== 5 ? "current" : ""%>">
+								<%= link_to "Messages", advertisers_messages_path %>
+								</li>
+								<li class="<%= @menuindex== 6 ? "last current" : "last"%>">
+								<%= link_to "Help", advertisers_help_path %>
+								</li>
+							</ul>
+						</div>
+						<div class="content">
+							<%= yield %>
+						</div>
+					</div>
+
+					<div id="footer">
+						<div class="block">
+							<p>
+								Copyright &copy; <%= Time.now.year %> AdServe.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

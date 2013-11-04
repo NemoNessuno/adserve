@@ -1,0 +1,22 @@
+== AdServe
+
+This is the GitHub repository for an ad server that uses
+
+-nginx link: http://nginx.org/
+-Couchbase link: http://www.couchbase.com/
+-Ruby on Rails link: http://rubyonrails.org/
+
+to speedily deliver ads, do tracking and offer an enjoyable and simple way for advertisers and webpage owners to engage in the entertaining field of advertising.
+
+== The rough steps to achieve the aforementioned goals:
+1. Set up a development environment (i.e. nginx + thin + Couchbase) in order to code and test the advertiser/webpage owner administration tools. (Mostly done.)
+
+2. Develop a mock-up interface for the administration tools (only just begun)
+
+3. Fill the database with the needed info for the administration tools (in order to be able to set up web pages with ads and campaigns who fill them)
+
+4. Set Up a developement environment (i.e. nginx + Couchbase) in order to code and test the ad delivery and tracking engine
+
+5. Develop the code for a nginx-plugin that parses the json-queries, makes the database-calls, implements a simple algorithm to choose an ad and track the view/click on it
+
+As you can see I'm nowhere even close to those goals so don't waste your time to clone this mess at this moment.

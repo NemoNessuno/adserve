@@ -1,0 +1,6 @@
+---
+  _id: "_design/messages"
+  language: "javascript"
+  views: 
+    messages: 
+      map: "function(doc,meta){ if(doc.type == 'message') {emit(doc.has_manyuser[0], doc.has_manyuser[1]);}}"

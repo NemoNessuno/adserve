@@ -1,0 +1,31 @@
+<h2 class="title">Find Websites</h2>
+<div class="inner">
+	<%= simple_form_for(@website, :url => websites_find_path, :html => { :class => 'form' }) do |f| %>
+		<div class="group wat-cf"> 
+			<div class="columns wat-cf" style="max-width:1000px"> 
+				<div class="column left"> 
+					<%= f.label :name %> 
+					<%= f.input :name, :label => false, input_html: { maxlength: 32, size: 32, class: 'text_field' } %> 
+				</div> 
+				<div class="column right"> 
+					<div class = "group bordered">
+						<%= f.input :categories, :as => :hidden%>
+						<%= categories_table %>
+					</div>
+				</div> 
+			</div> 
+		</div>
+		<div class="group navform wat-cf">
+			<%= button_tag(type: 'submit', class: "button") do%>
+				<%= image_tag('tick.png', :alt => 'Search') %> Search Websites
+			<%end%>
+		</div>
+	<% end %>
+		<% if (@websites.length > 0) %>
+			<%=		standard_table(
+				[
+					{ :name => 'name', :display_name => 'Name' },
+					{ :name => 'categories', :display_name => 'Categories' }
+				], @websites)%>
+	<% end %>
+</div>

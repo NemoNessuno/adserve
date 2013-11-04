@@ -1,0 +1,6 @@
+---
+  _id: "_design/campaigns"
+  language: "javascript"
+  views: 
+    campaigns: 
+      map: "function(doc,meta){ if(doc.type == 'campaign') {emit(doc.name, [doc.categories, doc.expiration_date, doc.cp_view, doc.cp_click, doc.cp_conversion]);}}"

@@ -1,0 +1,14 @@
+---
+- 
+  mainCategory : Sports
+  subCategories:
+    - Soccer
+    - Football
+    - Racing
+    - Golf
+  
+- 
+  mainCategory : Lifestyle
+  subCategories:
+    - Some
+    - Stuff

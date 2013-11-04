@@ -1,0 +1,76 @@
+<h2 class="title">Websites</h2>
+<div class="inner">
+	<div class="scrollable">
+		<span id="show_websites_extender" class="scrollable-controller collapsed"> </span>
+		<h4>Manage existing websites</h4>
+		<div class="scrollable-content">
+			<%= standard_table(
+				[
+					{ :name => 'name', :display_name => 'Name' },
+					{ :name => 'description', :display_name => 'Description' },
+				], @user.website) %>
+		</div>
+	</div>
+	<div class="scrollable">
+		<span id="add_website_extender" class="scrollable-controller collapsed" ></span>
+		<h4>Add Website </h4>
+		<div class="scrollable-content">
+			<%= simple_form_for(@website, :url => websites_add_path, :html => { :class => 'form' }) do |f| %>
+				<div class="columns wat-cf" style="max-width:1000px">
+					<div class="column left"> 
+						<div class="group">
+							<%= f.label :name %>
+							<%= f.input :name, :label => false, input_html: { maxlength: 32, size: 32, class: 'text_field' } %>
+						</div>
+						<div class="group">
+							<%= f.label :base_url %>
+							<%= f.input :base_url, :label => false, input_html: { maxlength: 64, class: 'text_field' } %>
+						</div>
+						<div class="group">
+							<%= f.label :description %>
+							<%= f.input :description, as: :text, :label => false, input_html: { class: 'text_area' } %>
+						</div>
+					</div>
+					<div class="column right">
+						<%= f.label :categories %>
+						<div class = "group bordered" style= "max-height: 40%; overflow scroll;">
+							<%= f.input :categories, :as => :hidden%>
+							<%= categories_table %>
+						</div>
+						<div class = "group">
+							<%= f.label :zone, 'Zones', :class => 'string optional label' %>
+							<%= standard_table(
+								[
+									{ :name => 'size.width', :display_name => 'Width' },
+									{ :name => 'size.height', :display_name => 'Height' },
+								], @website.zone, "zone_table")
+							%>
+						<div class="columns">
+							<%= f.input :zone_strings, :as => :hidden%>
+							<div class="column left">
+								<div class="group">
+									<%= label_tag :zone_widh, 'Width', :class => 'string optional label' %>
+									<%= text_field(:zone, :width, :size => 5, :class => 'string text_field') %>
+								</div>
+							</div>
+							<div class="column right">
+								<div class="group">
+									<%= label_tag(:zone_height, 'Height', :class => 'string optional label') %>
+									<%= text_field(:zone, :height, :size => 5, :class => 'string text_field') %>
+								</div>
+							</div>
+							<p class="clickable" onClick="addZone();">Add Zone</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="group navform wat-cf">
+				<%= button_tag(type: 'submit', class: "button") do%>
+					<%= image_tag('tick.png', :alt => 'Save Website') %> Save Website
+				<%end%>
+				<span class="text_button_padding">or</span>
+				<%= link_to "Cancel", {}, :class =>  "text_button_padding link_button" %>
+			</div>
+		<% end %>
+	</div>
+</div>

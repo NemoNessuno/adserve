@@ -1,0 +1,6 @@
+---
+  _id: "_design/admins"
+  language: "javascript"
+  views: 
+    admins: 
+      map: "function(doc,meta){ if(doc.type == 'admin') {emit(doc.name, doc.id);}}"

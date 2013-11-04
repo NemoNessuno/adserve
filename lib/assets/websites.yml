@@ -1,0 +1,6 @@
+---
+  _id: "_design/websites"
+  language: "javascript"
+  views: 
+    websites: 
+      map: "function(doc,meta){ if(doc.type == 'website') {emit(doc.name, [doc.categories, doc.has_manyzone]);}}"

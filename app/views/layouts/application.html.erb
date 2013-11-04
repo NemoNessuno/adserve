@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>AdServe</title>
+		<%= stylesheet_link_tag "application", :media => "all" %>
+		<%= javascript_include_tag "application" %>
+		<%= csrf_meta_tag %>
+	</head>
+	<body>
+		<div id="container">
+			<div id="header">
+				<h1><a href="/">AdServe</a></h1>
+				<div id="user-navigation">
+					<ul class="wat-cf">
+						<li>
+							<%= link_to "Sign Up", signup_advertiser_path %> | <%= link_to "Log in", log_in_path %>
+						</li>
+					</ul>
+				</div>
+				<div id="main-navigation">
+					<ul class="wat-cf"></ul>
+				</div>
+			</div>
+			<div id="wrapper" class="wat-cf">
+				<div id="main">
+					<div class="flash">
+						<% flash.each do |type, message| -%>
+						<div class="message <%= type %>">
+							<p>
+								<%= message %>
+							</p>
+						</div>
+						<% end -%>
+					</div>
+					<%= yield %>
+					<div id="footer">
+						<div class="block">
+							<p>
+								Copyright &copy; <%= Time.now.year %> AdServe.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

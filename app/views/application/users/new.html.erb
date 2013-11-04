@@ -1,0 +1,66 @@
+<div id="box">
+	<div class="block" id="block-signup">
+		<h2>Sign Up</h2>
+		<div class="content">
+			<%= simple_form_for(@user, :html => { :class => 'login form' }) do |f| %>
+				<div class="group wat-cf">
+					<div class="left">
+						<%= f.label :email, html: {class: 'label'} %>
+					</div>
+					<div class="right">
+						<%= f.input :email, :label => false, input_html: { size: 32, class: 'text_field' } %>
+						<span class="description">A valid e-mail adress</span>
+					</div>
+				</div>
+
+				<div class="group wat-cf">
+					<div class="left">
+						<%= f.label :name, label_html: {class: 'label'} %>
+					</div>
+					<div class="right">
+						<%= f.input :name, :label => false, input_html: { size: 32, class: 'text_field' } %>
+						<span class="description">Your name</span>
+					</div>
+				</div>
+
+				<div class="group wat-cf">
+					<div class="left">
+						<%= f.label :surname, label_html: {class: 'label'} %>
+					</div>
+					<div class="right">
+						<%= f.input :surname, :label => false, input_html: { size: 32, class: 'text_field' } %>
+						<span class="description">Your surname</span>
+					</div>
+				</div>
+
+				<div class="group wat-cf">
+					<div class="left">
+						<%= f.label :password,label_html: {class: 'label'} %>
+					</div>
+					<div class="right">
+						<%= f.input :password, :label => false, input_html: { maxlength: 32, size: 32, class: 'text_field' } %>
+						<span class="description">Bla bla safe password.</span>
+					</div>
+				</div>
+
+				<div class="group wat-cf">
+					<div class="left">
+						<%= f.label :password_confirmation, label_html: {class: 'label'} %>
+					</div>
+					<div class="right">
+						<%= f.input :password_confirmation,
+							:label => false, input_html: { maxlength: 32, size: 32, class: 'text_field' } %>
+						<span class="description">Repeat your password please</span>
+					</div>
+				</div>
+
+				<div class="group navform wat-cf">
+					<%= button_tag(type: 'submit', class: "button") do%>
+						<%= image_tag('tick.png', :alt => 'save') %> Sign Up &nbsp;
+					<%end%>
+					<!--<%= f.submit %>-->
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>

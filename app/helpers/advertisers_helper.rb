@@ -1,0 +1,3 @@
+module AdvertisersHelper
+  
+end

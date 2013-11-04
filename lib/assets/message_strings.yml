@@ -1,0 +1,9 @@
+---
+  fallback: "{1} send a message"
+  publisher_application_subject: "The publisher {1} offers zones for you to use as advertising real estate."
+  publisher_application_content: "The publisher {1}, is interested in your campaign:{2}The website(s) he offers space on are the following:{3}"
+  publisher_accept_application_subject: "The publisher {1}, accepts your application"
+  publisher_accept_application_content: "The publisher {1}, accepts your application for the following campaign:{2}"
+
+  advertiser_accept_application_subject: "The advertiser {1}, accepts your application"
+  advertiser_accept_application_content: "The advertiser {1}, accepts your application for the following campaign:{2}"

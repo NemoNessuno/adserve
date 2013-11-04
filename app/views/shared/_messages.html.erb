@@ -1,0 +1,31 @@
+<div>
+  <h4>You got <%= messages.length %> message<% if messages.length != 1%>s<%end%></h4>
+  <% if (messages.length > 0) %>
+    <% messages.each do |message|%>
+      <hr>
+      <%= simple_form_for(message, :url => url_for(:action => 'handle_message', :controller => 'advertisers'), :html => { :class => 'form' }, :method => 'post') do |f| %>
+        <%= f.input :id, :as => :hidden%>
+        <div class="scrollable" >
+          <div class="group wat-cf">
+            <div class="left">
+              <span class="scrollable-controller collapsed"> </span>
+              <p><b>Sender:</b> <%= message.sender.full_name %></p>
+            </div>
+            <p class="right"> <b>Subject:</b> <%= getSubject(message) %></p>
+          </div>
+          <div class="scrollable-content" style="padding-left:16px;" >
+            <div class ="group wat-cf">
+              <p class="left"><b>Message:</b>
+              <p class="right"><%= getContent(message) %></p>
+            </div>
+            <div class="group navform wat-cf">
+              <%= button_tag(type: 'submit', class: "button") do%>
+                <%= image_tag('tick.png', :alt => 'Accept') %> Accept
+              <%end%>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

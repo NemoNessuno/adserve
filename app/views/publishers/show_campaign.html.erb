@@ -1,0 +1,106 @@
+<h2 class="title">Campaign Details</h2>
+<div class="inner">
+	<!-- TODO: Built in back button -->
+	<h3><%=@campaign.name%></h3>
+	<div class="form">
+		<div class="columns wat-cf top-padded" style="max-width:1000px">
+			<div class="column left">
+				<hr>
+				<div class="group wat-cf">
+					<label class="label left">Target URL </label>
+					<p class="right"> <%= @campaign.target_url%> </p>
+				</div>
+				<hr>
+				<div class="group wat-cf">
+					<label class="label left">Expiration Date </label>
+					<p class="right"> <%= @campaign.expiration_date%></p>
+				</div>
+				<hr>
+				<div class="group wat-cf">
+					<label class="label left">Billing Type </label>
+					<p class="right"> <%= @campaign.billing_type%></p>
+				</div>
+				<hr>
+				<div class="group wat-cf">
+					<label class="label left">Cost per View </label>
+					<p class="right"> <%= @campaign.cp_view%></p>
+				</div>
+				<hr>
+				<div class="group wat-cf">
+					<label class="label left">Cost per Click</label>
+					<p class="right"> <%= @campaign.cp_click%></p>
+				</div>
+				<hr>
+				<div class="group wat-cf">
+					<label class="label left">Cost per Conversion</label>
+					<p class="right"> <%= @campaign.cp_conversion%></p>
+				</div>
+			</div>
+			<div class="column right">
+				<hr>
+				<div class="group wat-cf">
+					<label class="label left">Categories</label>
+					<p class="right"> <%= @campaign.categories %></p>
+				</div>
+				<hr>
+				<div class="group">
+					<label class="label">Advertisements</label>
+					<%= standard_table(
+						[
+							{ :name => 'content', :display_name => 'Content' },
+							{ :name => 'viewsCount', :display_name => 'Views' },
+							{ :name => 'clicksCount', :display_name => 'Clicks' },
+							{ :name => 'conversionsCount', :display_name => 'Conversions'}
+						], @campaign.ad) %>
+				</div>
+			</div>
+		</div>
+	</div>
+	<h3>Apply for this campaign</h3>
+	<h4> Your websites:</h4>
+	<%= simple_form_for(@campaign,
+											:url => url_for(:action => 'apply', :controller => 'publishers'),
+											:html => { :class => 'form' },
+											:method => 'post') do |f| %>
+		<% @user.website.each do |website| %>
+			<div class="scrollable">
+				<div class="group wat-cf">
+					<div class="left">
+						<span id="show_websites_extender" class="scrollable-controller collapsed"> </span>
+						<p> <%= website.name %> <p>
+					</div>
+				</div>
+				<div class="scrollable-content wat-cf">
+					<div class="group wat-cf">
+						<div class="left">
+							<p> Zones </p>
+							<%= clickable_table(
+								[
+									{ :name => 'width', :display_name => 'Width' },
+									{ :name => 'height', :display_name => 'Height' },
+								], website.zone)
+							%>
+					</div>
+					<div class="right">
+						<p> Advertisements </p>
+						<p id="help_text"> Click on one of the rows in the zone table to choose ads for this zone. </p>
+						<% website.zone.each do |zone| %>
+							<div id=<%="adsforzone_#{zone.id}"%> style="display:none">
+								<%= ad_for_zone_table(
+									[
+										{ :name => 'content', :display_name => 'Content' },
+									],@campaign.ad, zone.id) %>
+							</div>
+						<% end %>
+					</div>
+				</div>
+			</div>
+		</div>
+	<%end%>
+	<div class="group navform wat-cf">
+		<%= button_tag(type: 'submit', class: "button") do%>
+			<%= image_tag('tick.png', :alt => 'Send Application') %> Send Application
+		<%end%>
+	</div>
+	<% end %>
+</div>

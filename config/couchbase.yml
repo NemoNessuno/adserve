@@ -1,0 +1,28 @@
+common: &common
+  hostname: localhost
+  port: 8091
+  username: 
+  password:
+  pool: default
+
+development:
+  <<: *common
+  bucket: adserve
+
+test:
+  #hostname: localhost
+  #port: 8091
+  #username: cbadmin
+  #passwort: cbadmin
+  #pool: default
+  <<: *common
+  bucket: testadserve
+
+# set these environment variables on your production server
+production:
+  hostname: <%= ENV['COUCHBASE_HOST'] %>
+  port: <%= ENV['COUCHBASE_PORT'] %>
+  username: <%= ENV['COUCHBASE_USERNAME'] %>
+  password: <%= ENV['COUCHBASE_PASSWORD'] %>
+  pool: <%= ENV['COUCHBASE_POOL'] %>
+  bucket: <%= ENV['COUCHBASE_BUCKET'] %>

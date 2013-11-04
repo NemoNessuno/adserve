@@ -1,0 +1,32 @@
+<div id="box">
+	<div class="block" id="block-login">
+		<h2>Log in</h2>
+		<div class="content login">
+			<%= simple_form_for(sessions_path, :html => { :class => 'login form' }) do |f| %>
+			<div class="group wat-cf">
+				<div class="left">
+					<%= f.label :email , :class => 'label right'%>
+				</div>
+				<div class ="right">
+					<%= f.input :email, :label => false, input_html: { size: 32, class: 'text_field' } %>
+				</div>
+			</div>
+			<div class="group wat-cf">
+				<div class="left">
+					<%= f.label :password, :class => 'label right' %>
+				</div>
+				<div class ="right">
+					<%= f.input :password, :label => false, input_html: { maxlength: 32, size: 32, class: 'text_field' } %>
+				</div>
+			</div>
+			<div class="group navform wat-cf">
+				<div class ="right">
+					<%= button_tag(type: 'submit', class: "button") do%>
+						<%= image_tag('key.png', :alt => 'login') %> Log In
+					<%end%>
+				</div>
+			</div>
+			<% end %>
+		</div>
+	</div>
+</div>

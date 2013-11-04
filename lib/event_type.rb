@@ -1,0 +1,6 @@
+class EventType
+  BLOCK = 1
+  UNBLOCK = 2
+  APPLICATION = 3
+  ACCEPT_APPLICATION = 4
+end

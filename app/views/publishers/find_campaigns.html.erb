@@ -1,0 +1,37 @@
+<h2 class="title">Find Campaigns</h2>
+<div class="inner">
+	<%= simple_form_for(@campaign, :url => campaigns_find_path, :html => { :class => 'form' }) do |f| %>
+		<div class="group wat-cf">
+			<div class="columns wat-cf" style="max-width:1000px">
+				<div class="column left">
+					<%= f.label :name %>
+					<%= f.input :name, :label => false, input_html: { maxlength: 32, size: 32, class: 'text_field' } %>
+				</div>
+				<div class="column right">
+					<%= f.label :categories%>
+					<div class = "group bordered">
+						<%= f.input :categories, :as => :hidden%>
+						<%= categories_table %>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="group navform wat-cf">
+			<%= button_tag(type: 'submit', class: "button") do%>
+				<%= image_tag('tick.png', :alt => 'Search') %> Search Campaigns
+			<%end%>
+		</div>
+	<% end %>
+	<% if (@campaigns.length > 0) %>
+		<%=
+			inspect_id_table(
+			[
+				{ :name => 'name', :display_name => 'Name' },
+				{ :name => 'categories', :display_name => 'Categories' },
+				{ :name => 'expiration_date', :display_name => 'Date of Expiration' },
+				{ :name => 'cp_view', :display_name => 'Cost Per View'},
+				{ :name => 'cp_click', :display_name => 'Cost Per Click'},
+				{ :name => 'cp_conversion', :display_name => 'Cost Per Conversion'}
+			], @campaigns)%>
+	<% end %>
+</div>

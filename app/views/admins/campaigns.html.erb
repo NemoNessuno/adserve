@@ -1,0 +1,156 @@
+<h2 class="title">Campaigns</h2>
+<div class="inner">
+	<div class="scrollable">
+		<span id="show_campaigns_extender" class="scrollable-controller collapsed"> </span>
+		<h4>Manage existing campaigns</h4>
+		<div class="scrollable-content">
+			<%= standard_table(
+				[
+					{ :name => 'name', :display_name => 'Name' },
+					{ :name => 'overallCost', :display_name => 'Overall Cost' },
+					{ :name => 'expiration_date', :display_name => 'Day of Expiration'}
+				], @user.campaign) %>
+		</div>
+	</div>
+	<div class="scrollable">
+		<span id="add_campaign_extender" class="scrollable-controller collapsed"> </span>
+		<h4>Add new campaign</h4>
+		<div class="scrollable-content">
+			<%= simple_form_for(@campaign, :url => campaigns_add_path, :html => { :class => 'form' }) do |f| %>
+				<div class="group wat-cf">
+					<div class="columns wat-cf" style="max-width:1000px">
+						<div class="column left">
+							<div class="group">
+								<div class="columns">
+									<div class="column left">
+										<%= f.label :name %>
+										<%= f.input :name, :label => false, input_html: { maxlength: 32, size: 32, class: 'text_field' } %>
+									</div>
+									<div class="column right">
+										<%= f.label :expiration_date %>
+										<%= f.input :expiration_date,  :label => false, input_html: { maxlength: 32, size: 32, class: 'text_field datepicker' } %>
+									</div>
+								</div>
+							</div>
+							<div class="group">
+								<div class="columns">
+									<div class="column left">
+										<div class="columns">
+											<div class="column left">
+												<%= f.label :billing_type %>
+												<%= select(:campaign, :billing_type, BillingType.constants.map {|bt| [bt.to_s.downcase.camelize, BillingType.const_get(bt)] },{include_blank: true}) %>
+											</div>
+											<div class="column right">
+												<%= f.label :budget_type %>
+												<%= select(:campaign, :budget_type, BudgetType.constants.map {|bt| [bt.to_s.downcase.camelize, BudgetType.const_get(bt)] },{include_blank: true}) %>
+											</div>
+										</div>
+									</div>
+									<div class="column right">
+										<%= f.label :budget %>
+										<%= f.input :budget, :label => false, input_html: { maxlength: 32, size: 32, class: 'text_field' } %>
+									</div>
+								</div>
+							</div>
+							<div class="group wat-cf">
+								<div style="width:32%; float:left;">
+									<div class="group">
+										<%= f.label :cp_view, 'Cost Per View', :class => "string required label" %>
+										<%= f.input :cp_view, :label => false, input_html: { maxlength: 32, size: 32, class: 'text_field' } %>
+									</div>
+								</div>
+								<div style="width:32.1%; float:left; padding-left:9px;">
+									<div class="group">
+										<%= f.label :cp_click, 'Cost Per Click', :class => "string required label"  %>
+										<%= f.input :cp_click, :label => false, input_html: { maxlength: 32, size: 32, class: 'text_field' } %>
+									</div>
+								</div>
+								<div style="width:32.1%; float:left; padding-left:9px;">
+									<div class="group">
+										<%= f.label :cp_conversion, 'Cost Per Conversion', :class => "string required label"  %>
+										<%= f.input :cp_conversion, :label => false, input_html: { maxlength: 32, size: 32, class: 'text_field' } %>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="column right">
+							<%= f.label :categories %>
+							<div class = "group bordered" style= "max-height: 40%; overflow scroll;">
+								<%= f.input :categories, :as => :hidden%>
+								<%= categories_table %>
+							</div>
+							<%= f.label :ad %>
+							<div class = "group bordered" style= "max-height: 40%; overflow scroll;">
+								<%= selection_table(
+									[
+										{ :name => 'content', :display_name => 'Content' },
+										{ :name => 'viewsCount', :display_name => 'Views' },
+										{ :name => 'clicksCount', :display_name => 'Clicks' },
+										{ :name => 'conversionsCount', :display_name => 'Conversions'}
+									], @user.ad) %>
+
+							</div>
+						</div>
+						<div class="group navform wat-cf">
+						<%= button_tag(type: 'submit', class: "button") do%>
+							<%= image_tag('tick.png', :alt => 'Save') %> Save Campaign
+						<%end%>
+						<span class="text_button_padding">or</span>
+						<%= link_to "Cancel", {}, :class =>  "text_button_padding link_button" %>
+					</div>
+				<% end %>
+			</div>
+		</div>
+	</div>
+	<div class="scrollable">
+		<span id="show_ads_extender" class="scrollable-controller collapsed"> </span>
+		<h4>Manage existing advertisements</h4>
+		<div class="scrollable-content">
+			<%= standard_table(
+				[
+					{ :name => 'content', :display_name => 'Content' },
+					{ :name => 'viewsCount', :display_name => 'Views' },
+					{ :name => 'clicksCount', :display_name => 'Clicks' },
+					{ :name => 'conversionsCount', :display_name => 'Conversions'}
+				], @user.ad) %>
+		</div>
+	</div>
+	<div class="scrollable">
+		<span id="add_ad_extender" class="scrollable-controller collapsed"> </span>
+		<h4>Add new advertisement</h4>
+		<div class="scrollable-content">
+			<%= simple_form_for(@ad, :url => ads_add_path, :html => { :class => 'form' }) do |f| %>
+				<div class="group wat-cf">
+					<div class="columns wat-cf" style="max-width:1000px">
+						<div class="group">
+							<%= f.label :content %>
+							<%= f.input :content, :label => false, input_html: { maxlength: 32, size: 32, class: 'text_field' } %>
+						</div>
+						<div class="columns">
+							<div class="column left">
+								<div class="group">
+									<%= label_tag :ad_widh, 'Width', :class => 'string optional label' %>
+									<%= text_field(:ad, :width, :size => 5, :class => 'string text_field') %>
+									<%=	content_tag(:p, @ad.errors.messages[:width][0], :class =>  "error") if (@ad.errors.messages[:width].length > 0) %>
+								</div>
+							</div>
+							<div class="column right">
+								<div class="group">
+									<%= label_tag(:ad_height, 'Height', :class => 'string optional label') %>
+									<%= text_field(:ad, :height, :size => 5, :class => 'string text_field') %>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="group navform wat-cf">
+					<%= button_tag(type: 'submit', class: "button") do%>
+						<%= image_tag('tick.png', :alt => 'Save Ad') %> Save Ad
+					<%end%>
+					<span class="text_button_padding">or</span>
+					<%= link_to "Clear", {}, :class =>  "text_button_padding link_button" %>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>
