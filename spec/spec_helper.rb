@@ -63,15 +63,22 @@ class TestCouchbaseServer
 
   def start
     # flush testbucket
-    p "In Start"
     connection = Couchbase.new(:hostname => @host,
                                :port => @port,
                                :bucket => "testadserve")
-    p "Connection succesful"
-    connection.flush
-    p "Flushing succesful"
+    
+    i = 0
+    while i < 11 do
+      begin
+        i = i + 1
+        connection.flush
+        break
+      rescue
+        sleep(1.0)
+      end
+    end
+
     connection.set("categories", YAML.load_file("#{File.expand_path('../', __FILE__)}/categories.yml"))
-    p "Set categories succesful"
     connection.disconnect
   end
 end
