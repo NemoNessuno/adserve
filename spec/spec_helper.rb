@@ -74,6 +74,7 @@ class TestCouchbaseServer
         connection.flush
         break
       rescue
+        p "Fail: #{i}"
         sleep(1.0)
       end
     end
